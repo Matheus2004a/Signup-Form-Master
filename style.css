@@ -123,3 +123,20 @@ form p{
 form p b{
     color: var(--Red);
 }
+
+@media (min-width: 820px){
+    body{
+        display: flex;
+        height: 100vh;
+    }
+
+    header{
+        width: 30%;
+        text-align: left;
+    }
+
+    footer{
+        position: fixed;
+        bottom: 0;
+    }
+}
