@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    /* Colors primary */
+    --Red: hsl(0, 100%, 74%);
+    --Green-Light: hsl(154, 59%, 51%);
+    --Green: hsl(154, 59%, 45%);
+    --Green-Dark: hsl(154, 59%, 40%);
+    /* Colors accent */
+    --Purple: hsl(248, 32%, 49%);
+    /* Colors neutral */
+    --Dark-Blue: hsl(249, 10%, 26%); 
+    --Grayish-Blue: hsl(246, 25%, 77%);
+    --White: hsl(0, 0%, 100%);
+}
+
+body{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0 1.5rem;
+    background: var(--Red) url(./images/bg-intro-mobile.png) no-repeat center;
+}
+
+header{
+    display: grid;
+    gap: 1rem;
+    margin: 20% auto;
+    width: 90%;
+}
+
+header, footer a{
+    color: var(--White);
+}
+
+header,form p,footer{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+.card{
+    display: grid;
+    place-content: center;
+    padding: 1rem;
+    background-color: var(--Purple);
+    border-radius: 7px;
+    box-shadow: 0 5px 15px 0 var(--Dark-Blue);
+}
+
+.card p{
+    display: grid;
+    place-items: center;
+    color: var(--White);
+}
+
+form{
+    display: grid;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    background-color: var(--White);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px 0 var(--Dark-Blue);
+}
+
+fieldset,button,input{
+    border: none;
+}
+
+fieldset input::placeholder{
+    color: var(--Dark-Blue);
+    font-weight: 700;
+    opacity: .8;
+}
+
+input{
+    width: 100%;
+    font-size: 1rem;
+    border: 1px solid var(--Grayish-Blue);
+    padding: 1rem;
+    border-radius: 5px;
+    outline: none;
+}
+
+form button{
+    width: 100%;
+    border-radius: 5px;
+    padding: 1rem;
+    outline: none;
+    background-color: var(--Green);
+    color: var(--White);
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 5px 0 var(--Green-Dark);
+    transition: all .3s;
+    transform-style: preserve-3d;
+}
+
+form button:active{
+    transform: translate3d(0, .5em, -1em);
+    box-shadow: none;
+    opacity: .7;
+}
+
+form p{
+    color: var(--Grayish-Blue);
+}
+
+form p b{
+    color: var(--Red);
+}
