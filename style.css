@@ -59,8 +59,9 @@ a{
 }
 
 .card p{
-    display: grid;
-    place-items: center;
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
     color: var(--White);
 }
 
@@ -133,6 +134,11 @@ form p b{
     body{
         display: flex;
         height: 100vh;
+    }
+
+    .card{
+        display: flex;
+        justify-content: center;
     }
 
     header{
