@@ -92,6 +92,11 @@ input{
     padding: 1rem;
     border-radius: 5px;
     outline: none;
+    transition: all .5s;
+}
+
+input:focus{
+    border: 1px solid var(--Purple);
 }
 
 form button{
