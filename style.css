@@ -123,6 +123,19 @@ span.error{
     font-size: .8rem;
 }
 
+input:invalid,input.error,span.error,fieldset img{
+    animation: opacity .5s ease-in-out;
+}
+
+@keyframes opacity {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
 form button{
     width: 100%;
     border-radius: 5px;
