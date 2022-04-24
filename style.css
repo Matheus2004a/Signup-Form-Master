@@ -114,16 +114,23 @@ input:focus{
 }
 
 input.error{
-    border: 2px solid var(--Red);
+    border: 2px solid var(--Red) !important;
 }
 
 span.error{
+    display: flex;
+    justify-content: flex-end;
+    font-style: italic;
     color: var(--Red);
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     font-size: .8rem;
 }
 
-input:invalid,input.error,span.error,fieldset img{
+fieldset img{
+    display: none;
+}
+
+input.error,span.error,fieldset img{
     animation: opacity .5s ease-in-out;
 }
 

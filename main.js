@@ -1,66 +1,84 @@
-const firstName = document.querySelector("#first-name")
-const lastName = document.querySelector("#last-name")
-const email = document.querySelector("#email")
-const password = document.querySelector("#password")
 const form = document.querySelector("form")
-const fieldsets = document.querySelectorAll("fieldset")
-const iconError = document.createElement("img")
+const fields = document.querySelectorAll("[required]")
 
-form.addEventListener("submit", event => {
+function validateField(field, fieldset, iconError) {
+    function verifyErrors() {
+        let foundError = false
+
+        for (const error in field.validity) {
+            // Verifica se tem erro ou não é válido o campo
+            if (field.validity[error] && !field.validity.valid) {
+                foundError = error
+            }
+        }
+        return foundError
+    }
+
+    function customMessage(typeError) {
+        const messages = {
+            firstName: {
+                valueMissing: "First Name cannot be empty",
+            },
+            lastName: {
+                valueMissing: "Last Name cannot be empty",
+            },
+            email: {
+                valueMissing: "Email cannot be empty",
+                typeMismatch: "Looks like this is not an email"
+            },
+            password: {
+                valueMissing: "Password cannot be empty"
+            }
+        }
+        return messages[field.name][typeError]
+    }
+
+    function setCustomMessage(message) {
+        const spanError = fieldset.querySelector("span.error")
+
+        if (message) {
+            spanError.innerHTML = message
+            field.classList.add("error")
+            iconError.style.display = "block"
+        } else {
+            spanError.innerHTML = ""
+            field.classList.remove("error")
+            iconError.style.display = "none"
+        }
+        return message
+    }
+
+    return () => {
+        const error = verifyErrors()
+
+        if (error) {
+            const message = customMessage(error)
+
+            if (error == "typeMismatch") {
+                field.value = "email@example.com"
+                field.style.color = "hsl(0, 100%, 74%)"
+            }
+            setCustomMessage(message)
+        } else {
+            setCustomMessage()
+        }
+    }
+}
+
+function customValidation(event) {
     event.preventDefault()
+    // Store each input
+    const field = event.target
+    // Store each fieldset
+    const fieldset = event.path[1]
+    // Store each error icon
+    const iconError = event.path[1].children[2]
+    const validation = validateField(field, fieldset, iconError)
 
-    fieldsets.forEach((fieldset, index) => {
-        let error = document.createElement("span")
+    validation()
+}
 
-        /* First name */
-        if (firstName.value === "" && index === 0) {
-            error.innerHTML = "First Name cannot be empty"
-            addErrors(firstName, error, iconError)
-        }
-        else if (firstName.value === true) {
-            hideErrors(firstName, error, iconError)
-        }
-        
-        /* Last name */
-        if (lastName.value === "" && index === 1) {
-            error.innerHTML = "Last Name cannot be empty"
-            addErrors(lastName, error, iconError)
-        }
-        else if (lastName.value === true) {
-            hideErrors(lastName, error, iconError)
-        }
-        
-        /* Email */
-        if (email.value === "" && index === 2) {
-            error.innerHTML = "Email cannot be empty"
-            addErrors(email, error, iconError)
-        }
-        else if (email.value === true) {
-            error.innerHTML = "Looks like this is not an email"
-            hideErrors(email, error, iconError)
-        }
-        
-        /* Password */
-        if (password.value === "" && index === 3) {
-            error.innerHTML = "Password cannot be empty"
-            addErrors(password, error, iconError)
-        }
-        else if (password.value === true) {
-            hideErrors(password, error, iconError)
-        }
-
-        function addErrors(input, error, icon) {
-            input.classList.add("error")
-            error.classList.add("error")
-            icon.src = "./images/icon-error.svg"
-            fieldset.appendChild(error)
-            fieldset.appendChild(icon)
-        }
-
-        function hideErrors(input, error) {
-            input.classList.remove("error")
-            error.classList.remove("error")
-            error.innerHTML = ""
-        }
-    })
+fields.forEach(field => {
+    field.addEventListener("invalid", customValidation)
+    field.addEventListener("blur", customValidation)
 })
